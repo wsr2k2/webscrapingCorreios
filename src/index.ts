@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import * as express from "express";
-import * as bodyParser from "body-parser";
+import express from "express";
+import bodyParser from "body-parser";
 import routes from "./routes";
 
 const port = 3034;
@@ -9,6 +9,7 @@ const port = 3034;
 const app = express()
 createConnection()
 
+app.use(express.json())
 app.use(routes)
 
 
