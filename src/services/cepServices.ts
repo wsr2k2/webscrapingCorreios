@@ -1,18 +1,29 @@
 import puppeteer from "puppeteer";
-
-export const puppeteerResponse = (async (cep: string) => {
-
-  const browser = await puppeteer.launch( { headless: false});
-  const page = await browser.newPage();
-  await page.goto('https://www2.correios.com.br/sistemas/buscacep/buscaEndereco.cfm');
+import {getRepository} from "typeorm";
 
 
-  await page.type('[id="cep"]', ('\s'))
+class CepService {
 
-  await page.type('[id="cep"]', cep)
+  public async consultCEP(cep:string) {
 
-  await page.click('[type="submit"]')
+    const browser = await puppeteer.launch( { headless: false });
+    const page = await browser.newPage();
+    await page.goto('https://www2.correios.com.br/sistemas/buscacep/buscaEndereco.cfm');
+    await page.type('[id="cep"]', ('\s'))
+    await page.type('[id="cep"]', cep)
+    await page.click('[type="submit"]')
 
-  await browser.close();
-})
 
+    await page.waitForNavigation();
+    const address = await page.evaluate(() => document.querySelector("td").textContent)
+
+    console.log('address', address);
+
+
+    // await browser.close();
+
+  }
+
+}
+
+export default new CepService();
