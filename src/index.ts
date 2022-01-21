@@ -3,7 +3,7 @@ import {createConnection} from "typeorm";
 import express from "express";
 import routes from "./routes";
 
-const port = 3034;
+const port = 3035;
 
 const app = express()
 createConnection()
