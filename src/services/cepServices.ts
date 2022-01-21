@@ -13,11 +13,18 @@ class CepService {
     await page.type('[id="cep"]', cep)
     await page.click('[type="submit"]')
 
-
+    const sel = "td";
     await page.waitForNavigation();
-    const address = await page.evaluate(() => document.querySelector("td").textContent)
+    const address = await page.evaluate((sel) => {
+      const array = Array.from(document.querySelectorAll(sel))
+
+      return array
+    })
+    // const addressComplete = [...address];
+
 
     console.log('address', address);
+
 
 
     // await browser.close();
