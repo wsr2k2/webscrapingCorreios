@@ -8,4 +8,4 @@ export class Cep {
 
     @Column()
     cep: string;
-}   
+}

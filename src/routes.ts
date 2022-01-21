@@ -1,5 +1,5 @@
 import { Router, Request, Response} from "express"
-import { getCeps, postCeps } from "./controller/cep.controller"
+import { getCeps, postCeps, consultCEP } from "./controller/cep.controller"
 
 
 
@@ -11,5 +11,6 @@ routes.get('/', (req: Request, res: Response) => {
 
 routes.get("/ceps", getCeps);
 routes.post("/cep", postCeps);
+routes.post("/cep/consult", consultCEP);
 
 export default routes;
