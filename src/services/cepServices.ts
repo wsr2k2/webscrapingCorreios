@@ -12,7 +12,7 @@ export const puppeteerResponse = (async (cep: string) => {
   await page.type('[id="cep"]', cep)
 
   await page.click('[type="submit"]')
+
+  await browser.close();
 })
 
-
-// /\b/
