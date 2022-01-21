@@ -12,4 +12,4 @@ app.use(express.json())
 app.use(routes)
 
 
-app.listen(port, console.log(`Aplicacao rodando em: http://localhost:${port}/ceps`));
+app.listen(port, () => console.log(`Aplicacao rodando em: http://localhost:${port}/ceps`));
