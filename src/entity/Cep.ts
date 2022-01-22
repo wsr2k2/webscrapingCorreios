@@ -8,4 +8,13 @@ export class Cep {
 
     @Column()
     cep: string;
+
+    @Column()
+    rua: string;
+
+    @Column()
+    bairro: string;
+
+    @Column()
+    cidade_uf: string;
 }
