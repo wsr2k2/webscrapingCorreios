@@ -16,16 +16,14 @@
    "dependencies": {
       "body-parser": "^1.18.1",
       "express": "^4.15.4",
-      "mongodb": "^3.0.8",
+      "mongodb": "^4.3.1",
       "puppeteer": "^13.1.1",
       "reflect-metadata": "^0.1.10",
       "ts-node-dev": "^1.1.8",
       "typeorm": "0.2.41"
-
    },
    "main": "index.js",
    "repository": "https://github.com/wsr2k2/webscrapingCorreios.git",
    "author": "wsr2k2\nsudo git commit -am dhdh\ngit config --global user.name wsr2k2 <wsr2k2@gmail.com>",
    "license": "MIT"
-
 }
