@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import {getRepository} from "typeorm";
+import { getRepository } from "typeorm";
 import { Cep } from '../entity/Cep';
 
 interface IAddress {
@@ -38,38 +38,36 @@ class CepService {
 
   public async getAddresses() {
     try {
-      const addresses = await getRepository(Cep).find();
-      return addresses;
+      return await getRepository(Cep).find();
     } catch (error) {
       throw new Error(error);
     }
   }
 
   public async getAddressByCep(cep: string) {
+    console.log(cep)
     try {
-      const address = await getRepository(Cep).findOne({ cep: cep })
+      const address = await getRepository(Cep).findOne(cep);
       return address;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  // public async saveNewAddress(address: IAddress) {
-  //   try {
-  //     const addressToSaved = new Cep(address);
-  //     addressToSaved.cep = address.cep;
-  //     addressToSaved.rua = address.rua;
-  //     addressToSaved.bairro = address.bairro;
-  //     addressToSaved.cidade_uf = address.cidade_uf;
+  public async saveNewAddress(address: IAddress) {
+    try {
+      console.log(address)
+      const cepEntity = new Cep();
+      cepEntity.cep = address.cep;
+      cepEntity.rua = address.rua;
+      cepEntity.bairro = address.bairro;
+      cepEntity.cidade_uf = address.cidade_uf
 
-  //     console.log(addressToSaved)
-
-  //     // const cepResult = await getRepository(Cep).save(addressToSaved);
-  //     return {"message": "ok"};
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // }
+      return await getRepository(Cep).save(cepEntity);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
 }
 

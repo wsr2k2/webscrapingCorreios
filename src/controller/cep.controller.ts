@@ -4,8 +4,12 @@ import {Cep} from "../entity/Cep";
 import CepService from '../services/cepServices';
 
 export const getAddresses = async( request: Request, response: Response) => {
+  try {
     const ceps = await CepService.getAddresses();
     return response.json(ceps);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export const getCepId = async (request: Request, response: Response) => {
@@ -14,19 +18,28 @@ export const getCepId = async (request: Request, response: Response) => {
     return response.json(cep);
 }
 
-// export const postCeps = async( request: Request, response: Response) => {
-//     if(!request.body.cep) {
-//         response.status(400).json({ message: "O cep deve ser preenchido"})
-//         return;
-//     } if(request.body.cep.length != 8) {
-//         response.status(400).json({ message: "O Cep deve conter 8 digitos"})
-//         return
-//     }
-//     const { cep } = request.body;
-//     const cepResult = await CepService.saveNewAddress(cep);
+export const getAddressByCep = async (request: Request, response: Response) => {
+  const { cep } = request.body;
+  console.log(cep)
+  const address = await CepService.getAddressByCep(cep);
+  return response.json(address);
+}
 
-//     return response.json(cepResult)
-// }
+export const postCeps = async( request: Request, response: Response) => {
+    if(!request.body.cep) {
+        response.status(400).json({ message: "O cep deve ser preenchido"})
+        return;
+    } if(request.body.cep.length != 8) {
+        response.status(400).json({ message: "O Cep deve conter 8 digitos"})
+        return
+    }
+    try {
+      const cepResult = await CepService.saveNewAddress(request.body);
+      return response.json(cepResult)
+    } catch (error) {
+      throw new Error(error);
+    }
+}
 
 export const updateCep = async (request: Request, response: Response) => {
     const { id } = request.params;
@@ -46,10 +59,6 @@ export const removeCep = async (request: Request, response: Response) => {
         const cepUpdate = await getRepository(Cep).findOne(id)
         return response.json({ messagem: "Cep removido"})
     }
-
-
-    // puppeteerResponse(cep);
-    // return response.json(cepResult)
 }
 
 export const consultCEP = async(request: Request, response:Response) => {
