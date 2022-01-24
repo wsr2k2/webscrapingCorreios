@@ -70,7 +70,6 @@ class CepService {
   public async getOrSaveAddress(cep: string) {
     try {
       const dbAddress = await this.getAddressByCep(cep);
-      console.log( dbAddress )
       if (dbAddress.length > 0 ) {
         return ({ dbAddress: dbAddress });
       } else {

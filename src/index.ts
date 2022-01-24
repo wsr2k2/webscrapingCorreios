@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import express from "express";
+import morgan from 'morgan';
 import routes from "./routes";
 
 const port = 3035;
@@ -13,8 +14,9 @@ try {
   throw new Error(error)
 }
 
-app.use(express.json())
-app.use(routes)
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(routes);
 
 
 app.listen(port, () => console.log(`Aplicacao rodando em: http://localhost:${port}/ceps`));
