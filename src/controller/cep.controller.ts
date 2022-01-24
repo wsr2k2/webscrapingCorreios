@@ -1,6 +1,4 @@
-import {getRepository} from "typeorm";
 import { Request, Response } from "express";
-import {Cep} from "../entity/Cep";
 import CepService from '../services/cepServices';
 
 class CepController {
@@ -60,15 +58,11 @@ class CepController {
     }
   }
 
-  public async updateCep(request: Request, response: Response) {
+  public async updateAddress(request: Request, response: Response) {
     try {
       const { id } = request.params;
-
-      const cep = await getRepository(Cep).update(id, request.body)
-      if(cep.affected === 1) {
-          const cepUpdate = await getRepository(Cep).findOne(id)
-          return response.json(cepUpdate)
-      }
+      const address = await CepService.updateAddress(id, request.body);
+      return response.json(address);
     } catch (error) {
       throw new Error(error);
     }
@@ -77,12 +71,8 @@ class CepController {
   public async removeCep(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const cep = await getRepository(Cep).delete(id)
-
-      if(cep.affected === 1) {
-          const cepUpdate = await getRepository(Cep).findOne(id)
-          return response.json({ messagem: "Cep removido"})
-      }
+      const result = await CepService.removeAddress(id);
+        return response.json(result)
     } catch (error) {
       throw new Error(error)
     }

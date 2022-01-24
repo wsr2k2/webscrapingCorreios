@@ -82,6 +82,27 @@ class CepService {
     }
   }
 
+  public async updateAddress(id: string, address: IAddress) {
+    const cep = await getRepository(Cep).update(id, address)
+      if(cep.affected === 1) {
+          const cepUpdate = await getRepository(Cep).findOne(id)
+          return (cepUpdate)
+      }
+  }
+
+  public async removeAddress(id: string) {
+    try {
+      const address = await getRepository(Cep).delete(id)
+
+      if(address.affected === 1) {
+          const cepUpdate = await getRepository(Cep).findOne(id)
+          return ({ messagem: "Cep removido"})
+      }
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
 }
 
 export default new CepService();
