@@ -55,7 +55,6 @@ class CepService {
 
   public async saveNewAddress(address: IAddress) {
     try {
-      console.log(address)
       const cepEntity = new Cep();
       cepEntity.cep = address.cep;
       cepEntity.rua = address.rua;
@@ -63,6 +62,22 @@ class CepService {
       cepEntity.cidade_uf = address.cidade_uf
 
       return await getRepository(Cep).save(cepEntity);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  public async getOrSaveAddress(cep: string) {
+    try {
+      const dbAddress = await this.getAddressByCep(cep);
+      console.log( dbAddress )
+      if (dbAddress.length > 0 ) {
+        return ({ dbAddress: dbAddress });
+      } else {
+        const newAddress = await this.consultCEP(cep);
+        const savedAddress = await this.saveNewAddress(newAddress);
+        return ({ newAddress: savedAddress });
+      }
     } catch (error) {
       throw new Error(error);
     }

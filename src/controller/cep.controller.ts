@@ -50,6 +50,16 @@ class CepController {
     }
   }
 
+  public async getOrSaveAddress(request: Request, response: Response) {
+    try {
+      const { cep } = request.body;
+      const address = await CepService.getOrSaveAddress(cep);
+      return response.json(address);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   public async updateCep(request: Request, response: Response) {
     try {
       const { id } = request.params;
