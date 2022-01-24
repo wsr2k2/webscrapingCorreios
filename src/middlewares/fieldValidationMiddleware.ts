@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-export async function fielValidation(req: Request, res: Response, next: NextFunction) {
+export async function fieldValidation(req: Request, res: Response, next: NextFunction) {
 
   if(!req.body.cep) {
     res.status(400).json({ message: "O cep deve ser preenchido!"})
