@@ -1,16 +1,15 @@
 import { Router} from "express"
 
-import { getCepId, getAddresses, postCeps, removeCep, updateCep, consultCEP, getAddressByCep } from "./controller/cep.controller"
+import CepController from "./controller/cep.controller"
 
 const routes = Router()
 
-routes.get("/ceps", getAddresses);
-routes.get('/cep/:id', getCepId)
-routes.get('/cep/search', getAddressByCep)
-routes.post("/cep", postCeps);
-routes.put("/cep/:id", updateCep);
-routes.delete("/cep/:id", removeCep);
-routes.post("/cep/consult", consultCEP);
+routes.get("/ceps", CepController.getAddresses);
+routes.get('/cep/search/:cep', CepController.getAddressByCep);
+routes.post("/cep", CepController.saveAddress);
+routes.put("/cep/:id", CepController.updateCep);
+routes.delete("/cep/:id", CepController.removeCep);
+routes.post("/cep/consult", CepController.consultCep);
 
 
 export default routes;

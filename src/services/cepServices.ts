@@ -45,9 +45,8 @@ class CepService {
   }
 
   public async getAddressByCep(cep: string) {
-    console.log(cep)
     try {
-      const address = await getRepository(Cep).findOne(cep);
+      const address = await getRepository(Cep).find({ cep: cep });
       return address;
     } catch (error) {
       throw new Error(error);
