@@ -8,18 +8,26 @@
    },
    "devDependencies": {
       "@types/express": "^4.17.13",
+      "@types/morgan": "^1.9.3",
       "@types/node": "^8.0.29",
       "@types/puppeteer": "^5.4.4",
+      "@types/yup": "^0.29.13",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333"
    },
    "dependencies": {
       "body-parser": "^1.18.1",
       "express": "^4.15.4",
-      "mongodb": "^3.0.8",
+      "mongodb": "3.7.1",
+      "morgan": "^1.10.0",
       "puppeteer": "^13.1.1",
       "reflect-metadata": "^0.1.10",
       "ts-node-dev": "^1.1.8",
-      "typeorm": "0.2.41"
-   }
+      "typeorm": "0.2.41",
+      "yup": "^0.32.11"
+   },
+   "main": "index.js",
+   "repository": "https://github.com/wsr2k2/webscrapingCorreios.git",
+   "author": "wsr2k2\nsudo git commit -am dhdh\ngit config --global user.name wsr2k2 <wsr2k2@gmail.com>",
+   "license": "MIT"
 }

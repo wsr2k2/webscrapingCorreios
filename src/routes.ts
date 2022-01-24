@@ -1,16 +1,17 @@
-import { Router, Request, Response} from "express"
-import { getCeps, postCeps, consultCEP } from "./controller/cep.controller"
+import { Router} from "express"
 
-
+import CepController from "./controller/cep.controller"
+import { fieldValidation } from './middlewares/fieldValidationMiddleware';
 
 const routes = Router()
 
-routes.get('/', (req: Request, res: Response) => {
-    return res.json({ message: 'Testando a api'})
-})
+routes.post("/cep", fieldValidation, CepController.getOrSaveAddress);
+routes.get("/ceps", CepController.getAddresses);
+routes.get("/cep/search/:cep", CepController.getAddressByCep);
+routes.post("/cep/save", CepController.saveAddress);
+routes.put("/cep/:id", CepController.updateAddress);
+routes.delete("/cep/:id", CepController.removeCep);
+routes.post("/cep/consult", CepController.consultCep);
 
-routes.get("/ceps", getCeps);
-routes.post("/cep", postCeps);
-routes.post("/cep/consult", consultCEP);
 
 export default routes;
