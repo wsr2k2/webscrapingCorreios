@@ -1,10 +1,11 @@
 import { Router} from "express"
 
 import CepController from "./controller/cep.controller"
+import { fielValidation } from './middlewares/fieldValidationMiddleware';
 
 const routes = Router()
 
-routes.post("/cep", CepController.getOrSaveAddress);
+routes.post("/cep", fielValidation, CepController.getOrSaveAddress);
 routes.get("/ceps", CepController.getAddresses);
 routes.get("/cep/search/:cep", CepController.getAddressByCep);
 routes.post("/cep/save", CepController.saveAddress);

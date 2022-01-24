@@ -55,8 +55,10 @@ class CepService {
 
   public async saveNewAddress(address: IAddress) {
     try {
+
+      const formattedCep = address.cep.normalize("NFD").replace('-', '');
       const cepEntity = new Cep();
-      cepEntity.cep = address.cep;
+      cepEntity.cep = formattedCep;
       cepEntity.rua = address.rua;
       cepEntity.bairro = address.bairro;
       cepEntity.cidade_uf = address.cidade_uf

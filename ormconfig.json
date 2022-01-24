@@ -1,6 +1,6 @@
 {
    "type": "mongodb",
-   "url": "mongodb://localhost:27017/Correios",
+   "url": "mongodb+srv://admin:admin@cluster0.5ce8b.mongodb.net/test",
    "synchronize": true,
    "logging": false,
    "useUnifiedTopology": true,

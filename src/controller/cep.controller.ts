@@ -33,13 +33,6 @@ class CepController {
   }
 
   public async saveAddress(request: Request, response: Response) {
-    if(!request.body.cep) {
-      response.status(400).json({ message: "O cep deve ser preenchido"})
-      return;
-    } if(request.body.cep.length != 8) {
-        response.status(400).json({ message: "O Cep deve conter 8 digitos"})
-        return
-    }
     try {
       const cepResult = await CepService.saveNewAddress(request.body);
       return response.json(cepResult)
@@ -51,6 +44,7 @@ class CepController {
   public async getOrSaveAddress(request: Request, response: Response) {
     try {
       const { cep } = request.body;
+
       const address = await CepService.getOrSaveAddress(cep);
       return response.json(address);
     } catch (error) {
